@@ -738,6 +738,7 @@ function m(n, k) {
     var rtn = '';
     bin.split('').forEach(function(v) { // split 功能很强大  分割一个字符串为数组很方方便
         // str.split([separator[, limit]])  separator 可以是一个字符串或正则表达式 如果分隔符为空字符串，则将str原字符串中每个字符的数组形式返
+        // 
         rtn += base7[v]
     })
     return rtn;
@@ -1557,6 +1558,67 @@ compose(arr)({index: 0});
 function compose(arr) {
    
 }
+
+var compose = function(...args) {
+    var len = args.length
+    var count = len - 1
+    var result
+    return function f1(...args1) {
+        result = args[count].apply(this, args1)
+        if (count <= 0) {
+            count = len - 1
+            return result
+        } else {
+            count--
+            return f1.call(null, result)
+        }
+    }
+}
+
+function func1 (ctx) {
+    return ++ctx.index;
+
+}
+function func2 (ctx) {
+   return ++ctx;
+
+}
+function func3 (ctx) {
+    console.log(ctx);
+}
+
+compose(func3,func2,func1)({index : 1});
+
+
+
+const compose = (arr) => {
+  return function(ctx) {
+    [...arr].reverse().reduce((func, item) => {
+      return function(ctx) {
+        item(ctx, function() {
+          func(ctx)
+        })
+      }
+    }, ()=>{})(ctx)
+  }
+}
+
+
+
+const compose = (arr) => {
+  return function(ctx) {
+    [...arr].reverse().reduce((func, item) => {
+      return function(ctx) {
+        item(ctx, function() {
+          func(ctx)
+        })
+      }
+    }, ()=>{})(ctx)
+  }
+}
+
+
+
 var interval_id = setInterval(function() {
 
     $('#zh-load-more')[0].click();
