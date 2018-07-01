@@ -3,5 +3,3 @@
 
 - [PHP-Developer Interview](sections/php/)
 
-
-- [Interviews](sections/interviews/)

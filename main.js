@@ -1474,9 +1474,114 @@ s.instance('1')
 s.instance('2')
 s.instance('3')
 
+{
+
+
+out();
+
+function out(){
+    var url = "https://weibo.com/aj/f/remove?ajwvr=6";
+    var t = [...document.getElementsByClassName('follow_item S_line2')];
+    t.forEach(function(item, index){
+        var data = item.getAttribute('action-data');
+        send(url, data);
+    })
+}
+
+function send(url, post){
+    var http = new XMLHttpRequest();
+    
+    http.open("POST", url, true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    http.send(post);
+    
+    http.onreadystatechange = function() { 
+        if (http.readyState != 4 || http.status != 200) { 
+            return 
+        } 
+        var data = {}; 
+        try { 
+            data = JSON.parse(http.responseText);
+            console.log("http-data", data) 
+        } catch (err) { 
+            console.warn(err) 
+        } 
+    };
+}
 
 
 
+}
+
+
+{
+
+    //var _this = this;
+
+
+var url = "https://weibo.com/aj/f/remove?ajwvr=6";
+
+function g(){
+    var t = [...document.getElementsByClassName('follow_item S_line2')];
+
+    t.forEach(function(item, index){
+        var data = item.getAttribute('action-data');
+        var a = data.split('&'), uid = a[0].split('=')[1], name = a[1].split('=')[1];
+        var str = 'uid=' + uid + '&fname=' + name + '&fnick=' + name;
+        s(url, str);
+        return false;
+    })
+}
+
+g();
+function s(url, post){
+    var http = new XMLHttpRequest();
+    
+    http.open("POST", url, true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    http.send(post);
+    
+    http.onreadystatechange = function() { 
+        if (http.readyState != 4 || http.status != 200) { 
+            return 
+        } 
+        var data = {}; 
+        try { 
+            data = JSON.parse(http.responseText);
+            console.log("http-data", data) 
+        } catch (err) { 
+            console.warn(err) 
+        } 
+    };
+}
+
+
+    function s(uid, fname){
+        var url = "https://weibo.com/aj/f/remove";
+
+        var http = new XMLHttpRequest();
+        
+        http.open("POST", url, true);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        
+        http.send("uid=" + uid + '&fname=' + fname + '&fnick='+ fname);
+        
+        http.onreadystatechange = function() { 
+            if (http.readyState != 4 || http.status != 200) { 
+                return 
+            } 
+            var data = {}; 
+            try { 
+                data = JSON.parse(http.responseText);
+                console.log("http-data", data) 
+            } catch (err) { 
+                console.warn(err) 
+            } 
+        };
+    }
+}
 
 class Event{
   constructor(){
