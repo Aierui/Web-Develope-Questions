@@ -501,6 +501,10 @@ function quickSort(arr) {
     return quickSort(left).concat([key], quickSort(right)); //递归不断重复比较
 }
 
+// ideawu/quicksort
+// 快速排序QuickSort算法JavaScript实现, 包括 Hoare 和 Lomuto 版本的实现，以及网友实现版本的对比
+https://gist.github.com/ideawu/a114679bb8f0a94452d462ae14b7c977
+
 
 // 出现次数超过一半的数字
 
