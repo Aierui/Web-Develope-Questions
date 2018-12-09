@@ -1514,6 +1514,16 @@ function send(url, post){
     };
 }
 
+function kill(){
+    var url = "https://weibo.com/aj/f/unfollow?ajwvr=6&__rnd=1544359139942";
+    var t = [...document.getElementsByClassName('member_li S_bg1')];
+    t.forEach(function(item, index){
+        var data = item.getAttribute('action-data');
+        send(url, data);
+    })
+}
+
+
 
 
 }
